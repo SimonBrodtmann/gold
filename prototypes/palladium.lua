@@ -9,7 +9,7 @@ data:extend({
     icon_size = 64,
     subgroup = "raw-resource",
     order = "b[palladium-powder]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "item",
@@ -18,7 +18,7 @@ data:extend({
     icon_size = 128,
     subgroup = "raw-resource",
     order = "b[palladium-ingot]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "recipe",
@@ -28,12 +28,12 @@ data:extend({
     order = "d[palladium-ingot]",
     enabled = false,
     energy_required = 1.6,
-    ingredients = {{"palladium-powder", 1}},
+    ingredients = {{type="item", name="palladium-powder", amount=1}},
     results = util.me.byproduct() and
     {
       {type="item", name="palladium-ingot", amount=1, probability=0.95},
       {type="item", name="sulfur", amount=1, probability=0.05},
-    } or  {{"palladium-ingot", 1}},
+    } or  {{type="item", name="palladium-ingot", amount=1}},
   },
 })
 data:extend({
@@ -85,8 +85,8 @@ data:extend({
     order = "d[palladium-ingot]",
     enabled = false,
     energy_required = 5,
-    ingredients = {{"palladium-ingot", 1}, {util.titanium_plate, 4}},
-    results = {{"titanium-palladium-flange", 5}},
+    ingredients = {{type="item", name="palladium-ingot", amount=1}, {type="item", name=util.titanium_plate, amount=4}},
+    results = {{type="item", name="titanium-palladium-flange", amount=5}},
   },
 })
 util.add_unlock("palladium-processing", "titanium-palladium-flange")

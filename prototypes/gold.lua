@@ -8,7 +8,7 @@ data:extend({
     icon_size = 128,
     subgroup = "raw-resource",
     order = "b[gold-ingot]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "technology",
@@ -42,7 +42,7 @@ data:extend({
 })
 
 if mods.Krastorio2 then
-  local results = {{"gold-ingot", 5}}
+  local results = {{type="item", name="gold-ingot", amount=5}}
   if util.me.silver() and util.me.byproduct() then
     results = {
       {type = "item", name="gold-ingot", amount=4},
@@ -58,12 +58,12 @@ if mods.Krastorio2 then
       order = "d[gold-ingot]",
       enabled = false,
       energy_required = 8,
-      ingredients = {{"gold-ore", 20}},
+      ingredients = {{type="item", name="gold-ore", amount=20}},
       results = results,
     },
   })
 else
-  local results = {{"gold-ingot", 1}}
+  local results = {{type="item", name="gold-ingot", amount=1}}
   if util.me.silver() and util.me.byproduct() then
     results = {
       {type = "item", name="gold-ingot", amount=1, probability=.9},
@@ -80,7 +80,7 @@ else
       order = "d[gold-ingot]",
       enabled = false,
       energy_required = 1.6,
-      ingredients = {{"gold-ore", 2}},
+      ingredients = {{type="item", name="gold-ore", amount=2}},
       results = results,
     },
   })

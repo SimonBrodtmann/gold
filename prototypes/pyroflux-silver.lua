@@ -35,7 +35,7 @@ if util.se6() and util.me.silver() then
     },
     energy_required = 60,
     ingredients = {
-      {name = mods.Krastorio2 and "enriched-silver" or "silver-ore", amount = 24},
+      {type = "item", name = mods.Krastorio2 and "enriched-silver" or "silver-ore", amount = 24},
       {type = "fluid", name = "se-pyroflux", amount = 10},
     },
     enabled = false,
@@ -47,7 +47,7 @@ if util.se6() and util.me.silver() then
     type = "recipe",
     name = "silver-ingot",
     category = "casting",
-    results = {{"silver-ingot", 1}},
+    results = {{type="item", name="silver-ingot", amount=1}},
     energy_required = 25,
     ingredients = {
       {type = "fluid", name = "molten-silver", amount = 250},
@@ -66,11 +66,11 @@ if util.se6() and util.me.silver() then
       {icon = "__bzgold__/graphics/icons/silver-ingot.png", icon_size = 128, scale = 0.125, shift = {-8, -8}},
     },
     results = {
-      {name = "silver-plate", amount = 10},
+      {type = "item", name = "silver-plate", amount = 10},
     },
     energy_required = 5,
     ingredients = {
-      {name = "silver-ingot", amount = 1}
+      {type = "item", name = "silver-ingot", amount = 1}
     },
     enabled = false,
     always_show_made_in = true,

@@ -8,15 +8,15 @@ if util.me.silver() then
       icon = "__bzgold__/graphics/icons/silver-ore.png",
       icon_size = 128,
       pictures = {
-        {filename="__bzgold__/graphics/icons/silver-ore.png", size=128, scale=0.125},
-        {filename="__bzgold__/graphics/icons/silver-ore-1.png", size=128, scale=0.125},
-        {filename="__bzgold__/graphics/icons/silver-ore-2.png", size=128, scale=0.125},
-        {filename="__bzgold__/graphics/icons/silver-ore-3.png", size=128, scale=0.125},
-        {filename="__bzgold__/graphics/icons/silver-ore-4.png", size=128, scale=0.125},
+        {filename="__bzgold__/graphics/icons/silver-ore.png", size=128, scale=0.25},
+        {filename="__bzgold__/graphics/icons/silver-ore-1.png", size=128, scale=0.25},
+        {filename="__bzgold__/graphics/icons/silver-ore-2.png", size=128, scale=0.25},
+        {filename="__bzgold__/graphics/icons/silver-ore-3.png", size=128, scale=0.25},
+        {filename="__bzgold__/graphics/icons/silver-ore-4.png", size=128, scale=0.25},
       },
       subgroup = "raw-resource",
       order = "a[silver-ore]",
-      stack_size = util.get_stack_size(200),
+      stack_size = 200,
     },
   })
   data:extend({
@@ -27,7 +27,7 @@ if util.me.silver() then
       icon_size = 128,
       subgroup = "raw-resource",
       order = "b[silver-plate]",
-      stack_size = util.get_stack_size(100),
+      stack_size = 100,
     },
     mods.Krastorio2 and {
       type = "recipe",
@@ -36,8 +36,8 @@ if util.me.silver() then
       order = "d[silver-plate]",
       enabled = false,
       energy_required = 8,
-      ingredients = {{"silver-ore", 10}},
-      results = {{"silver-plate", 5}},
+      ingredients = {{type="item", name="silver-ore", amount=10}},
+      results = {{type="item", name="silver-plate", amount=5}},
     } or {
       type = "recipe",
       name = "silver-plate",
@@ -45,8 +45,8 @@ if util.me.silver() then
       order = "d[silver-plate]",
       enabled = false,
       energy_required = 1.6,
-      ingredients = {{"silver-ore", 1}},
-      results = {{"silver-plate", 1}},
+      ingredients = {{type="item", name="silver-ore", amount=1}},
+      results = {{type="item", name="silver-plate", amount=1}},
     },
   })
 
@@ -58,7 +58,7 @@ if util.me.silver() then
       icon_size = 64, icon_mipmaps = 4,
       subgroup = util.cablesg,
       order = "b[silver-wire]",
-      stack_size = util.get_stack_size(200),
+      stack_size = 200,
     },
     {
       type = "recipe",
@@ -67,18 +67,18 @@ if util.me.silver() then
       order = "d[silver-wire]",
       enabled = false,
       energy_required = 1,
-      ingredients = {{"silver-plate", 1}},
-      results = {{"silver-wire", 3}},
+      ingredients = {{type="item", name="silver-plate", amount=1}},
+      results = {{type="item", name="silver-wire", amount=3}},
     },
   })
 
-  brazing = mods.BrassTacks and {
-    {"silver-plate", 2},
-    {"zinc-plate", 1},
-    {"copper-plate", 1}
+  brazing = mods["BrassTacks-Updated"] and {
+    {type="item", name="silver-plate", amount=2},
+    {type="item", name="zinc-plate", amount=1},
+    {type="item", name="copper-plate", amount=1}
   } or {
-    {"silver-plate", 2},
-    {"copper-plate", 2}
+    {type="item", name="silver-plate", amount=2},
+    {type="item", name="copper-plate", amount=2}
   }
   
   data:extend({
@@ -89,7 +89,7 @@ if util.me.silver() then
       icon_size = 128,
       subgroup = "intermediate-product",
       order = "b[silver-brazing-alloy]",
-      stack_size = util.get_stack_size(100),
+      stack_size = 100,
     },
     {
       type = "recipe",
@@ -99,7 +99,7 @@ if util.me.silver() then
       enabled = false,
       energy_required = 4,
       ingredients = brazing,
-      results = {{"silver-brazing-alloy", 4}},
+      results = {{type="item", name="silver-brazing-alloy", amount=4}},
     },
   })
 
@@ -126,7 +126,7 @@ if util.me.silver() then
       },
       unit = {
         count = 10, time = 15,
-        ingredients = mods.Krastorio2 and { {"basic-tech-card", 1}, }
+        ingredients = mods.Krastorio2 and { {"kr-basic-tech-card", 1}, }
         or { {"automation-science-pack", 1}, },
       },
       prerequisites = prereqs,

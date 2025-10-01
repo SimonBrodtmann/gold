@@ -12,7 +12,7 @@ See changelog.txt
 
 ## Thanks to 
 - [snouz](https://github.com/snouz) (inspiration for logo)
-
+- [cackling fiend](https://mods.factorio.com/user/cackling.fiend) (Update to 2.0)
 
 ### Localization
 - [Klarkxy](https://github.com/klarkxy) (zh-CN)

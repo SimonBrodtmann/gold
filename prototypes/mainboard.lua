@@ -1,7 +1,7 @@
 local util = require("data-util");
 
 
-if not (mods.bobelectronics or mods.MDbobelectronics) then
+if not (mods.bobelectronics or mods.MDbobelectronics or mods.MDbobelectronics2) then
 
   data:extend({
     {
@@ -11,7 +11,7 @@ if not (mods.bobelectronics or mods.MDbobelectronics) then
       icon_size = 128,
       subgroup = "intermediate-product",
       order = "b[mainboard]",
-      stack_size = util.get_stack_size(200),
+      stack_size = 200,
     },
     {
       type = "recipe",
@@ -20,8 +20,8 @@ if not (mods.bobelectronics or mods.MDbobelectronics) then
       order = "d[mainboard]",
       enabled = false,
       energy_required = 2.5,
-      ingredients = {{"advanced-circuit", 10}, {"gold-ingot", 1}},
-      results = {{"mainboard", 10}},
+      ingredients = {{type="item", name="advanced-circuit", amount=10}, {type="item", name="gold-ingot", amount=1}},
+      results = {{type="item", name="mainboard", amount=10}},
     },
   })
    
@@ -38,8 +38,8 @@ if not (mods.bobelectronics or mods.MDbobelectronics) then
         order = "d[mainboard]",
         enabled = false,
         energy_required = 5,
-        ingredients = {{"se-holmium-cable", 2}, {"advanced-circuit", 20}, {"gold-ingot", 1}},
-        results = {{"mainboard", 20}},
+        ingredients = {{type="item", name="se-holmium-cable", amount=2}, {type="item", name="advanced-circuit", amount=20}, {type="item", name="gold-ingot", amount=1}},
+        results = {{type="item", name="mainboard", amount=20}},
       },
     })
   end
@@ -54,8 +54,8 @@ if not (mods.bobelectronics or mods.MDbobelectronics) then
     util.add_ingredient("mainboard-holmium", "mlcc", 10, {"force", true})
   end
   if mods.Krastorio2 then
-    util.add_ingredient("mainboard", "rare-metals", 20, {"force", true})
-    util.add_ingredient("mainboard-holmium", "rare-metals", 20, {"force", true})
+    util.add_ingredient("mainboard", "kr-rare-metals", 20, {"force", true})
+    util.add_ingredient("mainboard-holmium", "kr-rare-metals", 20, {"force", true})
   end
 
 else

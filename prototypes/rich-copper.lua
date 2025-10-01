@@ -1,5 +1,4 @@
 local resource_autoplace = require('resource-autoplace');
-local noise = require('noise');
 local futil = require("util");
 
 local util = require("data-util");
@@ -7,7 +6,7 @@ local util = require("data-util");
 if util.me.platinum() or util.me.palladium() then
 if mods.Krastorio2 then
   -- no rich copper
-  local rm = futil.table.deepcopy(data.raw.recipe["rare-metals"])
+  local rm = futil.table.deepcopy(data.raw.recipe["kr-rare-metals"])
   rm.name = "rare-metals-1"
   data:extend({rm})
   util.add_unlock("platinum-processing", "rare-metals-1")
@@ -15,27 +14,27 @@ if mods.Krastorio2 then
   util.add_icon("rare-metals-1", {icon = "__bzgold__/graphics/icons/platinum-powder.png",
                                   icon_size = 64, scale = 0.25, shift = {-8,8}})
 
-  util.multiply_recipe("rare-metals", 2)
+  util.multiply_recipe("kr-rare-metals", 2)
   util.multiply_recipe("rare-metals-1", 2)
   util.multiply_recipe("rare-metals-2", 2)
 
-  util.set_main_product("rare-metals", "rare-metals")
-  util.set_product_amount("rare-metals", "rare-metals", 6)
-  util.set_main_product("rare-metals-1", "rare-metals")
-  util.set_main_product("rare-metals-2", "rare-metals")
+  util.set_main_product("kr-rare-metals", "kr-rare-metals")
+  util.set_product_amount("kr-rare-metals", "kr-rare-metals", 6)
+  util.set_main_product("rare-metals-1", "kr-rare-metals")
+  util.set_main_product("rare-metals-2", "kr-rare-metals")
 
 
   if util.me.platinum() and util.me.palladium() then
-    util.replace_some_product("rare-metals-1", "rare-metals", 2, "platinum-powder",  2, {force=true})
-    util.replace_some_product("rare-metals-1", "rare-metals", 2, "palladium-powder", 2, {force=true})
-    util.replace_some_product("rare-metals-2", "rare-metals", 3, "platinum-powder",  3, {force=true})
-    util.replace_some_product("rare-metals-2", "rare-metals", 3, "palladium-powder", 3, {force=true})
+    util.replace_some_product("rare-metals-1", "kr-rare-metals", 2, "platinum-powder",  2, {force=true})
+    util.replace_some_product("rare-metals-1", "kr-rare-metals", 2, "palladium-powder", 2, {force=true})
+    util.replace_some_product("rare-metals-2", "kr-rare-metals", 3, "platinum-powder",  3, {force=true})
+    util.replace_some_product("rare-metals-2", "kr-rare-metals", 3, "palladium-powder", 3, {force=true})
   elseif util.me.platinum() then
-    util.replace_some_product("rare-metals-1", "rare-metals", 3, "platinum-powder",  4, {force=true})
-    util.replace_some_product("rare-metals-2", "rare-metals", 6, "platinum-powder",  6, {force=true})
+    util.replace_some_product("rare-metals-1", "kr-rare-metals", 3, "platinum-powder",  4, {force=true})
+    util.replace_some_product("rare-metals-2", "kr-rare-metals", 6, "platinum-powder",  6, {force=true})
   elseif util.me.palladium() then
-    util.replace_some_product("rare-metals-1", "rare-metals", 3, "palladium-powder", 4, {force=true})
-    util.replace_some_product("rare-metals-2", "rare-metals", 6, "palladium-powder", 6, {force=true})
+    util.replace_some_product("rare-metals-1", "kr-rare-metals", 3, "palladium-powder", 4, {force=true})
+    util.replace_some_product("rare-metals-2", "kr-rare-metals", 6, "palladium-powder", 6, {force=true})
   end
 else
 
@@ -84,10 +83,9 @@ end
 
 if data.raw.resource["copper-ore"] then
   if mods["space-exploration"] then
-    local noise = require('noise');
     -- decrease richness of copper a bit (ok if it stacks with aluminum)
-    data.raw.resource["copper-ore"].autoplace.richness_expression = 
-      data.raw.resource["copper-ore"].autoplace.richness_expression * noise.to_noise_expression(3/4)
+    data.raw.resource["copper-ore"].autoplace.richness_expression =
+      data.raw.resource["copper-ore"].autoplace.richness_expression .. "*(3/4)"
   else
     log("Replacing vanilla copper-ore autoplace")
     local resource_autoplace = require('resource-autoplace');
@@ -116,10 +114,6 @@ if util.se6() then
 end
 
 data:extend({
-	{
-    type = "noise-layer",
-    name = "rich-copper-ore"
-	},
 	{
     type = "resource",
     name = "rich-copper-ore",
@@ -181,14 +175,14 @@ data:extend({
       icon_size = 64, icon_mipmaps=4,
       icon = "__bzgold__/graphics/icons/rich-copper-ore.png",
       pictures = {
-        {filename="__bzgold__/graphics/icons/rich-copper-ore.png", size=64, scale=0.25},
-        {filename="__bzgold__/graphics/icons/rich-copper-ore-1.png", size=64, scale=0.25},
-        {filename="__bzgold__/graphics/icons/rich-copper-ore-2.png", size=64, scale=0.25},
-        {filename="__bzgold__/graphics/icons/rich-copper-ore-3.png", size=64, scale=0.25},
+        {filename="__bzgold__/graphics/icons/rich-copper-ore.png", size=64, scale=0.5},
+        {filename="__bzgold__/graphics/icons/rich-copper-ore-1.png", size=64, scale=0.5},
+        {filename="__bzgold__/graphics/icons/rich-copper-ore-2.png", size=64, scale=0.5},
+        {filename="__bzgold__/graphics/icons/rich-copper-ore-3.png", size=64, scale=0.5},
       },
       subgroup = "raw-resource",
       order = "t-c-a",
-      stack_size = util.get_stack_size(50)
+      stack_size = 50
   },
 })
 
@@ -197,6 +191,7 @@ data:extend({
   {
     type = "recipe",
     name = "rich-copper",
+    localised_name = {"item-name.copper-plate"},
     category = "smelting",
     main_product = "copper-plate",
     order = "d[copper-plate]",
@@ -209,7 +204,7 @@ data:extend({
       -- {icon = "__bzgold__/graphics/icons/palladium-powder.png", icon_size = 64, scale=0.25, shift = {-8,-8}},
     },
     energy_required = 6.4,
-    ingredients = {{"rich-copper-ore", 2}},
+    ingredients = {{type="item", name="rich-copper-ore", amount=2}},
     results = results,
   },
 })

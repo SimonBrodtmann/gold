@@ -4,7 +4,7 @@ local util = require("data-util")
 -- K2 silver from copper
 if mods.Krastorio2 then
   util.replace_some_product("copper-plate", "copper-plate", 1, "silver-ore", 1)
-  util.add_product("enriched-copper", {"silver-ore", 1})
+  util.add_product("enriched-copper", {type="item", name="silver-ore", amount=1})
 end
 
 if mods.bztitanium then
@@ -63,19 +63,19 @@ util.add_ingredient("kr-quantum-computer", "mlcc", 50)
 
 
 if util.me.palladium() then
-  util.add_ingredient("additional-engine", "palladium-ingot", 1)
+  util.add_ingredient("kr-additional-engine-equipment", "palladium-ingot", 1)
 elseif util.me.platinum() then
-  util.add_ingredient("additional-engine", "platinum-ingot", 1)
+  util.add_ingredient("kr-additional-engine-equipment", "platinum-ingot", 1)
 end
 
 -- K2 blank tech card
 if mods.Krastorio2 and util.me.silver() then
-  local tc = futil.table.deepcopy(data.raw.recipe["blank-tech-card"])
+  local tc = futil.table.deepcopy(data.raw.recipe["kr-blank-tech-card"])
   tc.name = "blank-tech-card-silver"
   data:extend({tc})
   util.replace_ingredient("blank-tech-card-silver", "copper-cable", "silver-wire")
-  local amt = util.get_amount("blank-tech-card")
-  util.set_product_amount("blank-tech-card-silver", "blank-tech-card", amt)
+  local amt = util.get_amount("kr-blank-tech-card")
+  util.set_product_amount("blank-tech-card-silver", "kr-blank-tech-card", amt)
   util.add_icon("blank-tech-card-silver", {
     icon = "__bzgold__/graphics/icons/silver-wire.png",
     icon_size = 64, icon_mipmaps = 4, scale = 0.25, shift = {8,-8}

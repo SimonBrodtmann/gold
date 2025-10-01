@@ -6,10 +6,10 @@ local enrich_results =
     util.me.silver() and {
       {type = "item",  name = "enriched-gold", amount = 5},
       {type = "item",  name = "enriched-silver", amount = 1},
-      {type = "fluid", name = "dirty-water", amount = 25, catalyst_amount = 25}
+      {type = "fluid", name = "kr-dirty-water", amount = 25, ignored_by_productivity = 25}
     } or { 
       {type = "item",  name = "enriched-gold", amount = 6},
-      {type = "fluid", name = "dirty-water", amount = 25, catalyst_amount = 25}
+      {type = "fluid", name = "kr-dirty-water", amount = 25, ignored_by_productivity = 25}
     }
 
 data:extend({
@@ -19,14 +19,14 @@ data:extend({
     icon_size = 128,
     icon = "__bzgold__/graphics/icons/enriched-gold.png",
       -- pictures = {
-      --   {filename="__bzgold__/graphics/icons/enriched-gold.png", size=64, scale=0.25},
-      --   {filename="__bzgold__/graphics/icons/enriched-gold-2.png", size=64, scale=0.25},
-      --   {filename="__bzgold__/graphics/icons/enriched-gold-3.png", size=64, scale=0.25},
-      --   {filename="__bzgold__/graphics/icons/enriched-gold-4.png", size=64, scale=0.25},
+      --   {filename="__bzgold__/graphics/icons/enriched-gold.png", size=64, scale=0.5},
+      --   {filename="__bzgold__/graphics/icons/enriched-gold-2.png", size=64, scale=0.5},
+      --   {filename="__bzgold__/graphics/icons/enriched-gold-3.png", size=64, scale=0.5},
+      --   {filename="__bzgold__/graphics/icons/enriched-gold-4.png", size=64, scale=0.5},
       -- },
     subgroup = "raw-material",
     order = "e05-a[enriched-ores]-a1[enriched-gold]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "recipe",
@@ -43,8 +43,8 @@ data:extend({
 	subgroup = "raw-material",
     ingredients =
     {
-      {type = "fluid", name = "chlorine", amount = 15},
-      {type = "fluid", name = "water", amount = 25, catalyst_amount = 25},
+      {type = "fluid", name = "kr-chlorine", amount = 15},
+      {type = "fluid", name = "water", amount = 25, ignored_by_productivity = 25},
       {type = "item",  name = "gold-ore", amount = 9}
     },
     results = enrich_results,
@@ -60,6 +60,7 @@ data:extend({
   {
       type = "recipe",
       name = "enriched-gold-ingot",
+      localised_name = {"item-name.enriched-gold"},
       icons =
       {
         { icon = "__bzgold__/graphics/icons/gold-ingot.png", icon_size = 128, icon_mipmaps = 3, },
@@ -73,30 +74,29 @@ data:extend({
       allow_productivity = true,
       ingredients = 
       {
-        {"enriched-gold", 20}
+        {type="item", name="enriched-gold", amount=20}
       },
-      result = "gold-ingot",
-      result_count = 10,
+      results = {{type="item", name="gold-ingot", amount=10}},
       order = "b[gold-ingot]-b[enriched-gold-ingot]"
   },	
 	{
 		type = "recipe",
 		name = "dirty-water-filtration-gold",
-		category = "fluid-filtration",
+		category = "kr-fluid-filtration",
 		icons =
 		{
 			{
-				icon = data.raw.fluid["dirty-water"].icon,
-				icon_size = data.raw.fluid["dirty-water"].icon_size
+				icon = data.raw.fluid["kr-dirty-water"].icon,
+				icon_size = data.raw.fluid["kr-dirty-water"].icon_size
 			},
 			{
 				icon = data.raw.item["gold-ore"].icon,
 				icon_size =	data.raw.item["gold-ore"].icon_size,
-				scale = 0.20 * (data.raw.fluid["dirty-water"].icon_size/data.raw.item["gold-ore"].icon_size),
+				scale = 0.2,
 				shift = {0, 4}
 			}
 		},
-		icon_size = data.raw.fluid["dirty-water"].icon_size,
+		icon_size = data.raw.fluid["kr-dirty-water"].icon_size,
 		energy_required = 2,
 		enabled = false,
 		allow_as_intermediate = false,
@@ -104,11 +104,11 @@ data:extend({
 		always_show_products = true,
 		ingredients =
 		{
-			{type = "fluid", name = "dirty-water", amount = 100, catalyst_amount = 100},
+			{type = "fluid", name = "kr-dirty-water", amount = 100, ignored_by_productivity = 100},
 		},
 		results =
 		{
-			{type = "fluid", name = "water", amount = 90, catalyst_amount = 90},
+			{type = "fluid", name = "water", amount = 90, ignored_by_productivity = 90},
 			{type = "item",  name = "stone", probability = 0.30, amount = 1},
 			{type = "item",  name = "gold-ore", probability = 0.05, amount = 1}
 		},

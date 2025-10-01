@@ -9,7 +9,7 @@ data:extend({
     icon_size = 64,
     subgroup = "raw-resource",
     order = "b[platinum-powder]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "item",
@@ -18,7 +18,7 @@ data:extend({
     icon_size = 128,
     subgroup = "raw-resource",
     order = "b[platinum-ingot]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "recipe",
@@ -28,12 +28,12 @@ data:extend({
     order = "d[platinum-ingot]",
     enabled = false,
     energy_required = 1.6,
-    ingredients = {{"platinum-powder", 1}},
+    ingredients = {{type="item", name="platinum-powder", amount=1}},
     results = util.me.byproduct() and 
     {
       {type="item", name="platinum-ingot", amount=1, probability=0.95},
       {type="item", name="sulfur", amount=1, probability=0.05},
-    } or {{"platinum-ingot", 1}},
+    } or {{type="item", name="platinum-ingot", amount=1}},
   },
 })
 data:extend({

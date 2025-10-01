@@ -1,7 +1,11 @@
 local resource_autoplace = require('resource-autoplace');
-local noise = require('noise');
+local item_sounds = require('__base__.prototypes.item_sounds')
 
 local util = require("data-util");
+
+data.raw.planet.nauvis.map_gen_settings.autoplace_controls["gold-ore"] = {}
+data.raw.planet.nauvis.map_gen_settings.autoplace_settings.entity.settings["gold-ore"] = {}
+resource_autoplace.initialize_patch_set("gold-ore", true)
 
 data:extend({
 	{
@@ -10,10 +14,6 @@ data:extend({
     name = "gold-ore",
     richness = true,
     order = "b-e"
-	},
-	{
-    type = "noise-layer",
-    name = "gold-ore"
 	},
 	{
     type = "resource",
@@ -82,15 +82,19 @@ data:extend({
       icon_size = 128,
       icon = "__bzgold__/graphics/icons/gold-ore.png",
       pictures = {
-        {filename="__bzgold__/graphics/icons/gold-ore.png", size=128, scale=0.125},
-        {filename="__bzgold__/graphics/icons/gold-ore-1.png", size=128, scale=0.125},
-        {filename="__bzgold__/graphics/icons/gold-ore-2.png", size=128, scale=0.125},
-        {filename="__bzgold__/graphics/icons/gold-ore-3.png", size=128, scale=0.125},
-        {filename="__bzgold__/graphics/icons/gold-ore-4.png", size=128, scale=0.125},
+        {filename="__bzgold__/graphics/icons/gold-ore.png", size=128, scale=0.25},
+        {filename="__bzgold__/graphics/icons/gold-ore-1.png", size=128, scale=0.25},
+        {filename="__bzgold__/graphics/icons/gold-ore-2.png", size=128, scale=0.25},
+        {filename="__bzgold__/graphics/icons/gold-ore-3.png", size=128, scale=0.25},
+        {filename="__bzgold__/graphics/icons/gold-ore-4.png", size=128, scale=0.25},
       },
       subgroup = "raw-resource",
       order = "a-a-a",
-      stack_size = util.get_stack_size(50)
+      stack_size = 50,
+      weight = 20*kg,
+      inventory_move_sound = item_sounds.resource_inventory_move,
+      pick_sound = item_sounds.resource_inventory_pickup,
+      drop_sound = item_sounds.resource_inventory_move,
   },
 })
 

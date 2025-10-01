@@ -1,6 +1,6 @@
 local util = require("data-util");
 
-if mods["248k"] then
+if mods["248k-Redux"] then
   local au2 = "fu_materials_gold_ingot"
 
   -- Swap out all 248k gold ingot for BZ gold ingot

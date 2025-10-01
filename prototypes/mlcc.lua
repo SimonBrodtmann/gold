@@ -2,17 +2,19 @@ local util = require("data-util");
 
 if util.me.palladium() then
 
-local ingredients = {{"palladium-ingot", 1}, {"stone", 2}}
+local ingredients = {{type="item", name="palladium-ingot", amount=1}, {type="item", name="stone", amount=2}}
 if mods.bzzirconium and mods.bzaluminum then
-  ingredients = {{"palladium-ingot", 1}, {"zirconia", 1}, {"alumina", 1}}
+  ingredients = {{type="item", name="palladium-ingot", amount=1}, {type="item", name="zirconia", amount=1}, {type="item", name="alumina", amount=1}}
 elseif mods.bzzirconium then
-  ingredients = {{"palladium-ingot", 1}, {"zirconia", 2}}
+  ingredients = {{type="item", name="palladium-ingot", amount=1}, {type="item", name="zirconia", amount=2}}
 elseif mods.bzaluminum then
-  ingredients = {{"palladium-ingot", 1}, {"alumina", 2}}
+  ingredients = {{type="item", name="palladium-ingot", amount=1}, {type="item", name="alumina", amount=2}}
 elseif mods.bzsilicon then
-  ingredients = {{"palladium-ingot", 1}, {"silica", 3}}
-elseif mods.Krastorio2 or mods["aai-industry"] or mods["sand-and-glass"] then
-  ingredients = {{"palladium-ingot", 1}, {"sand", 2}}
+  ingredients = {{type="item", name="palladium-ingot", amount=1}, {type="item", name="silica", amount=3}}
+elseif mods.Krastorio2 then
+  ingredients = {{type="item", name="palladium-ingot", amount=1}, {type="item", name="kr-sand", amount=2}}
+elseif mods["aai-industry"] or mods["sand-and-glass"] then
+  ingredients = {{type="item", name="palladium-ingot", amount=1}, {type="item", name="sand", amount=2}}
 end
 
 data:extend({
@@ -35,7 +37,7 @@ data:extend({
       },
     subgroup = "intermediate-product",
     order = "b[gold-ingot]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "recipe",
@@ -45,7 +47,7 @@ data:extend({
     enabled = false,
     energy_required = 4,
     ingredients = ingredients,
-    results = {{"mlcc", 10}},
+    results = {{type="item", name="mlcc", amount=10}},
   },
   {
     type = "technology",

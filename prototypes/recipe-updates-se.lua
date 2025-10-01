@@ -12,7 +12,7 @@ if util.se6() then
   util.replace_ingredient("se-space-science-lab", "processing-unit", "advanced-circuit", 100)
   util.replace_ingredient("se-empty-lifesupport-canister", "processing-unit", "advanced-circuit", 5)
 
-  util.remove_prerequisite("se-meteor-defence", "advanced-electronics-2")
+  util.remove_prerequisite("se-meteor-defence", "processing-unit")
   util.add_prerequisite("se-meteor-defence", "se-rocket-science-pack")
   util.set_tech_recipe("se-meteor-defence", {
     {"automation-science-pack", 1},

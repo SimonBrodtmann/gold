@@ -28,7 +28,7 @@ if util.se6() then
     },
     energy_required = 60,
     ingredients = {
-      {name = mods.Krastorio2 and "enriched-gold" or "gold-ore", amount = 24},
+      {type = "item", name = mods.Krastorio2 and "enriched-gold" or "gold-ore", amount = 24},
       {type = "fluid", name = "se-pyroflux", amount = 10},
     },
     enabled = false,
@@ -40,7 +40,7 @@ if util.se6() then
     type = "recipe",
     name = "gold-ingot-casting",
     category = "casting",
-    results = {{"gold-ingot", 1}},
+    results = {{type="item", name="gold-ingot", amount=1}},
     energy_required = 2.5,
     ingredients = {
       {type = "fluid", name = "molten-gold", amount = 50},
@@ -57,6 +57,6 @@ if util.se6() then
     data.raw.recipe["enriched-gold-ingot"].order = "d[gold-ingot]"
     se_delivery_cannon_recipes["enriched-gold"] = {name= "enriched-gold"}
   else
-    if util.me.byproduct() then util.add_product("molten-gold", {"silver-ore", 9}) end
+    if util.me.byproduct() then util.add_product("molten-gold", {type="item", name="silver-ore", amount=9}) end
   end
 end

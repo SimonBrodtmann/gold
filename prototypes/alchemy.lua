@@ -11,8 +11,8 @@ if util.me.alchemy() then
       order = "d[gold-ingot]2",
       enabled = false,
       energy_required = 16,
-      ingredients = {{"lead-plate", 2}},
-      results = {{"gold-ingot", 1}},
+      ingredients = {{type="item", name="lead-plate", amount=2}},
+      results = {{type="item", name="gold-ingot", amount=1}},
       icons = {
         {
           icon = "__bzgold__/graphics/icons/gold-ingot.png",

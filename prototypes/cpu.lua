@@ -1,22 +1,24 @@
 local util = require("data-util");
 
-local silicon = {"stone", 30}
-if mods.bzsilicon or mods.Krastorio2 then
-  silicon = data.raw.item["silicon-wafer"] and {"silicon-wafer", 30} or {"silicon", 15}
+local silicon = {type="item", name="stone", amount=30}
+if mods.bzsilicon then
+  silicon = data.raw.item["silicon-wafer"] and {type="item", name="silicon-wafer", amount=30} or {type="item", name=mods.Krastorio2 and "kr-silicon" or "silicon", amount=15}
+elseif mods.Krastorio2 then
+  silicon = data.raw.item["silicon-wafer"] and {type="item", name="silicon-wafer", amount=30} or {type="item", name="kr-silicon", amount=15}
 elseif data.raw.item["sand"] then
-  silicon = {"sand", 30}
+  silicon = {type="item", name="sand", amount=30}
 end
 
-local spreader = data.raw.item["cuw"] and {"cuw", 2} or {"copper-plate", 2}
+local spreader = data.raw.item["cuw"] and {type="item", name="cuw", amount=2} or {type="item", name="copper-plate", amount=2}
 data:extend({
   {
     type = "item",
     name = "cpu",
-    icon = "__base__/graphics/technology/advanced-electronics-2.png",
+    icon = "__base__/graphics/technology/advanced-circuit.png",
     icon_size = 256,
     subgroup = "intermediate-product",
     order = "b[cpu]",
-    stack_size = util.get_stack_size(200),
+    stack_size = 200,
   },
   {
     type = "recipe",
@@ -26,19 +28,19 @@ data:extend({
     enabled = false,
     energy_required = 50,
     ingredients = {
-      silicon, spreader, {"gold-ingot", 1}, {"electronic-circuit", 10},
+      silicon, spreader, {type="item", name="gold-ingot", amount=1}, {type="item", name="electronic-circuit", amount=10},
       {type="fluid", name="sulfuric-acid", amount=50},
     },
-    results = {{"cpu", 10}},
+    results = {{type="item", name="cpu", amount=10}},
   },
 })
 if mods["space-exploration"] then
   local cpui = {}
   if mods.Krastorio2 then
-    cpui = {{"se-holmium-cable", 2}, silicon, spreader, {"electronic-circuit", 20}, {"gold-ingot", 1},
+    cpui = {{type="item", name="se-holmium-cable", amount=2}, silicon, spreader, {type="item", name="electronic-circuit", amount=20}, {type="item", name="gold-ingot", amount=1},
             {type="fluid", name="sulfuric-acid", amount=50}}
   else
-    cpui = {{"se-holmium-cable", 1}, silicon, spreader, {"electronic-circuit", 20}, {"gold-ingot", 1},
+    cpui = {{type="item", name="se-holmium-cable", amount=1}, silicon, spreader, {type="item", name="electronic-circuit", amount=20}, {type="item", name="gold-ingot", amount=1},
             {type="fluid", name="sulfuric-acid", amount=50}}
   end
   data:extend({
@@ -46,7 +48,7 @@ if mods["space-exploration"] then
       type = "recipe",
       name = "cpu-holmium",
       icons = {
-        { icon = "__base__/graphics/technology/advanced-electronics-2.png", icon_size = 256, },
+        { icon = "__base__/graphics/technology/advanced-circuit.png", icon_size = 256, },
         { icon = "__space-exploration-graphics__/graphics/icons/holmium-solenoid.png", icon_size = 64, scale=.25, shift={-8, -8} },
       },
       category = "crafting-with-fluid",
@@ -54,7 +56,7 @@ if mods["space-exploration"] then
       enabled = false,
       energy_required = 50,
       ingredients = cpui,
-      results = {{"cpu", 20}},
+      results = {{type="item", name="cpu", amount=20}},
     },
   })
 end

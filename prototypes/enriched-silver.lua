@@ -8,14 +8,14 @@ data:extend({
     icon_size = 128,
     icon = "__bzgold__/graphics/icons/enriched-silver.png",
       -- pictures = {
-      --   {filename="__bzgold__/graphics/icons/enriched-silver.png", size=64, scale=0.25},
-      --   {filename="__bzgold__/graphics/icons/enriched-silver-2.png", size=64, scale=0.25},
-      --   {filename="__bzgold__/graphics/icons/enriched-silver-3.png", size=64, scale=0.25},
-      --   {filename="__bzgold__/graphics/icons/enriched-silver-4.png", size=64, scale=0.25},
+      --   {filename="__bzgold__/graphics/icons/enriched-silver.png", size=64, scale=0.5},
+      --   {filename="__bzgold__/graphics/icons/enriched-silver-2.png", size=64, scale=0.5},
+      --   {filename="__bzgold__/graphics/icons/enriched-silver-3.png", size=64, scale=0.5},
+      --   {filename="__bzgold__/graphics/icons/enriched-silver-4.png", size=64, scale=0.5},
       -- },
     subgroup = "raw-material",
     order = "e05-a[enriched-ores]-a1[enriched-silver]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
 })
 
@@ -25,24 +25,24 @@ if util.me.platinum() and util.me.palladium() then
       {type = "item",  name = "enriched-silver", amount = 5},
       {type = "item",  name = "platinum-powder", amount = 1, probability=0.5},
       {type = "item",  name = "palladium-powder", amount = 1, probability=0.5},
-      {type = "fluid", name = "dirty-water", amount = 25, catalyst_amount = 25}
+      {type = "fluid", name = "kr-dirty-water", amount = 25, ignored_by_productivity = 25}
   }
 elseif util.me.platinum() then
   enrich_results = {
       {type = "item",  name = "enriched-silver", amount = 5},
       {type = "item",  name = "platinum-powder", amount = 1},
-      {type = "fluid", name = "dirty-water", amount = 25, catalyst_amount = 25}
+      {type = "fluid", name = "kr-dirty-water", amount = 25, ignored_by_productivity = 25}
   }
 elseif util.me.palladium() then
   enrich_results = {
       {type = "item",  name = "enriched-silver", amount = 5},
       {type = "item",  name = "palladium-powder", amount = 1},
-      {type = "fluid", name = "dirty-water", amount = 25, catalyst_amount = 25}
+      {type = "fluid", name = "kr-dirty-water", amount = 25, ignored_by_productivity = 25}
   }
 else
   enrich_results = {
       {type = "item",  name = "enriched-silver", amount = 6},
-      {type = "fluid", name = "dirty-water", amount = 25, catalyst_amount = 25}
+      {type = "fluid", name = "kr-dirty-water", amount = 25, ignored_by_productivity = 25}
   }
 end
 
@@ -63,7 +63,7 @@ data:extend({
     ingredients =
     {
       {type = "fluid", name = "sulfuric-acid", amount = 10},
-      {type = "fluid", name = "water", amount = 25, catalyst_amount = 25},
+      {type = "fluid", name = "water", amount = 25, ignored_by_productivity = 25},
       {type = "item",  name = "silver-ore", amount = 9}
     },
     results = enrich_results,
@@ -79,6 +79,7 @@ data:extend({
   {
       type = "recipe",
       name = "enriched-silver-plate",
+      localised_name = {"item-name.enriched-silver"},
       icons =
       {
         { icon = "__bzgold__/graphics/icons/silver-plate.png", icon_size = 128, icon_mipmaps = 3, },
@@ -92,30 +93,29 @@ data:extend({
       allow_productivity = true,
       ingredients = 
       {
-        {"enriched-silver", 10}
+        {type="item", name="enriched-silver", amount=10}
       },
-      result = "silver-plate",
-      result_count = 10,
+      results = {{type="item", name="silver-plate", amount=10}},
       order = "b[silver-plate]-b[enriched-silver-plate]"
   },	
 	{
 		type = "recipe",
 		name = "dirty-water-filtration-silver",
-		category = "fluid-filtration",
+		category = "kr-fluid-filtration",
 		icons =
 		{
 			{
-				icon = data.raw.fluid["dirty-water"].icon,
-				icon_size = data.raw.fluid["dirty-water"].icon_size
+				icon = data.raw.fluid["kr-dirty-water"].icon,
+				icon_size = data.raw.fluid["kr-dirty-water"].icon_size
 			},
 			{
 				icon = data.raw.item["silver-ore"].icon,
 				icon_size =	data.raw.item["silver-ore"].icon_size,
-				scale = 0.20 * (data.raw.fluid["dirty-water"].icon_size/data.raw.item["silver-ore"].icon_size),
+				scale = 0.2,
 				shift = {0, 4}
 			}
 		},
-		icon_size = data.raw.fluid["dirty-water"].icon_size,
+		icon_size = data.raw.fluid["kr-dirty-water"].icon_size,
 		energy_required = 2,
 		enabled = false,
 		allow_as_intermediate = false,
@@ -123,11 +123,11 @@ data:extend({
 		always_show_products = true,
 		ingredients =
 		{
-			{type = "fluid", name = "dirty-water", amount = 100, catalyst_amount = 100},
+			{type = "fluid", name = "kr-dirty-water", amount = 100, ignored_by_productivity = 100},
 		},
 		results =
 		{
-			{type = "fluid", name = "water", amount = 90, catalyst_amount = 90},
+			{type = "fluid", name = "water", amount = 90, ignored_by_productivity = 90},
 			{type = "item",  name = "stone", probability = 0.30, amount = 1},
 			{type = "item",  name = "silver-ore", probability = 0.05, amount = 1}
 		},

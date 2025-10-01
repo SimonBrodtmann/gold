@@ -1,11 +1,11 @@
 local util = require("data-util")
 
-util.remove_ingredient("processing-unit", "silicon")
+util.remove_ingredient("processing-unit", mods.Krastorio2 and "kr-silicon" or "silicon")
 util.remove_ingredient("processing-unit", "silicon-wafer")
 util.remove_ingredient("processing-unit", "sulfuric-acid")
 util.remove_ingredient("processing-unit", "electronic-circuit")
 util.remove_ingredient("processing-unit", "advanced-circuit")
-util.remove_ingredient("processing-unit", "rare-metals") -- k2
+util.remove_ingredient("processing-unit", "kr-rare-metals") -- k2
 util.add_ingredient("processing-unit", "cpu", 1)
 util.set_recipe_time("processing-unit", 2)
 util.add_ingredient("processing-unit", "mainboard", 1)

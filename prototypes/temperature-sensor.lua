@@ -9,7 +9,9 @@ elseif mods.bzaluminum then
   base = "alumina"
 elseif mods.bzsilicon then
   base = "silica"
-elseif mods.Krastorio2 or mods["aai-industry"] or mods["sand-and-glass"] then
+elseif mods.Krastorio2 then
+  base = "kr-glass"
+elseif mods["aai-industry"] or mods["sand-and-glass"] then
   base = "glass"
 end
 
@@ -22,7 +24,7 @@ data:extend({
     icon_size = 128,
     subgroup = "intermediate-product",
     order = "b[gold-ingot]",
-    stack_size = util.get_stack_size(100),
+    stack_size = 100,
   },
   {
     type = "recipe",
@@ -31,8 +33,8 @@ data:extend({
     order = "d[temperature-sensor]",
     enabled = false,
     energy_required = 4,
-    ingredients = {{"platinum-ingot", 1}, {base, 2}},
-    results = {{"temperature-sensor", 10}},
+    ingredients = {{type="item", name="platinum-ingot", amount=1}, {type="item", name=base, amount=2}},
+    results = {{type="item", name="temperature-sensor", amount=10}},
   },
   {
     type = "technology",
